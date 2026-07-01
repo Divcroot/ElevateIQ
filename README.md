@@ -2,6 +2,10 @@
 
 InterviewIQ is an AI-powered mock interview platform that helps candidates practice interviews for HR and technical roles. Users can sign in, choose an interview mode, upload a resume, receive AI-generated questions, answer them in real time, and get a detailed evaluation report with scoring and feedback.
 
+## Live Demo
+
+- Frontend: https://elevateiq-frontend.onrender.com
+
 ## Features
 
 - AI-driven mock interviews for HR and technical roles

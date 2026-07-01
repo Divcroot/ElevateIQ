@@ -16,7 +16,10 @@ dotenv.config();
 
 const app = express();
 
-const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"].filter(Boolean);
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  "https://elevateiq-frontend.onrender.com"
+].filter(Boolean);
 
 app.use(
   cors({
