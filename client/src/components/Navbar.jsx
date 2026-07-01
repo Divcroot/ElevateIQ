@@ -30,18 +30,18 @@ const Navbar = () => {
         }
     }
   return (
-    <div className='bg-[#f3f3f3] flex justify-center px-4 pt-6'>
+    <div className='bg-slate-50 flex justify-center px-4 pt-6'>
         <motion.div 
         initial={{opacity:0 , y:-40}}
         animate={{opacity:1 , y:0}}
         transition={{duration: 0.3}}
-        className='w-full max-w-6xl bg-white rounded-3xl shadow-sm border border-gray-200 px-8 py-4 flex justify-between items-center relative'>
+        className='w-full max-w-5xl bg-white/80 rounded-3xl backdrop-blur-xl shadow-sm border border-slate-200 px-8 py-4 flex justify-between items-center relative'>
             <div className='flex items-center gap-3 cursor-pointer'>
                 <div className='bg-black text-white p-2 rounded-lg'>
                     <BsRobot size={18}/>
 
                 </div>
-                <h1 className='font-semibold hidden md:block text-lg'>InterviewIQ.AI</h1>
+                <h1 className='font-semibold hidden md:block text-lg'>ElevateIQ</h1>
             </div>
 
             <div className='flex items-center gap-6  relative'>

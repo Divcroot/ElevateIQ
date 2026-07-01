@@ -13,7 +13,7 @@ import { ServerUrl } from '../App';
 import { useUser } from '../context/UserContext';
 
 const Step1SetUp = ({ onStart }) => {
-    const {userData, setUserData} = useUser()
+    const { userData, setUserData } = useUser()
     const [role, setRole] = useState("");
     const [experience, setExperience] = useState("");
     const [mode, setMode] = useState("Technical");
@@ -25,6 +25,21 @@ const Step1SetUp = ({ onStart }) => {
     const [analysisDone, setAnalysisDone] = useState(false);
     const [analyzing, setAnalyzing] = useState(false);
 
+    const highlights  = [
+        {
+            icon: <FaUserTie className="text-green-600 text-xl" />,
+            text: "Choose Role & Experience",
+        },
+        {
+            icon: <FaMicrophoneAlt className="text-green-600 text-xl" />,
+            text: "Smart Voice Interview",
+        },
+        {
+            icon: <FaChartLine className="text-green-600 text-xl" />,
+            text: "Performance Analytics",
+        },
+    ]
+
 
     const handleUploadResume = async () => {
         if (!resumeFile || analyzing) return;
@@ -35,8 +50,6 @@ const Step1SetUp = ({ onStart }) => {
 
         try {
             const result = await axios.post(ServerUrl + "/api/interview/resume", formdata, { withCredentials: true })
-
-            console.log(result.data)
 
             setRole(result.data.role || "");
             setExperience(result.data.experience || "");
@@ -56,13 +69,13 @@ const Step1SetUp = ({ onStart }) => {
     const handleStart = async () => {
         setLoading(true)
         try {
-           const result = await axios.post(ServerUrl + "/api/interview/generate-questions" , {role, experience, mode , resumeText, projects, skills } , {withCredentials:true}) 
-           console.log(result.data)
-           if(userData){
-            setUserData({...userData , credits:result.data.creditsLeft})
-           }
-           setLoading(false)
-           onStart(result.data)
+            const result = await axios.post(ServerUrl + "/api/interview/generate-questions", { role, experience, mode, resumeText, projects, skills }, { withCredentials: true })
+
+            if (userData) {
+                setUserData({ ...userData, credits: result.data.creditsLeft })
+            }
+            setLoading(false)
+            onStart(result.data)
 
         } catch (error) {
             console.log(error)
@@ -95,40 +108,22 @@ const Step1SetUp = ({ onStart }) => {
 
                     <div className='space-y-5'>
 
-                        {
-                            [
-                                {
-                                    icon: <FaUserTie className="text-green-600 text-xl" />,
-                                    text: "Choose Role & Experience",
-                                },
-                                {
-                                    icon: <FaMicrophoneAlt className="text-green-600 text-xl" />,
-                                    text: "Smart Voice Interview",
-                                },
-                                {
-                                    icon: <FaChartLine className="text-green-600 text-xl" />,
-                                    text: "Performance Analytics",
-                                },
-                            ].map((item, index) => (
-                                <motion.div key={index}
-                                    initial={{ y: 30, opacity: 0 }}
-                                    animate={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.3 + index * 0.15 }}
-                                    whileHover={{ scale: 1.03 }}
-                                    className='flex items-center space-x-4 bg-white p-4 rounded-xl shadow-sm cursor-pointer'>
-                                    {item.icon}
-                                    <span className='text-gray-700 font-medium'>{item.text}</span>
+                        {highlights .map((item, index) => (
+                            <motion.div key={index}
+                                initial={{ y: 30, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.3 + index * 0.15 }}
+                                whileHover={{ scale: 1.03 }}
+                                className='flex items-center space-x-4 bg-white p-4 rounded-xl shadow-sm cursor-pointer'>
+                                {item.icon}
+                                <span className='text-gray-700 font-medium'>{item.text}</span>
 
-                                </motion.div>
-                            ))
+                            </motion.div>
+                        ))
                         }
                     </div>
 
-
-
                 </motion.div>
-
-
 
                 <motion.div
                     initial={{ x: 80, opacity: 0 }}
@@ -201,13 +196,9 @@ const Step1SetUp = ({ onStart }) => {
                                         className='mt-4 bg-gray-900 text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition'>
                                         {analyzing ? "Analyzing..." : "Analyze Resume"}
 
-
-
                                     </motion.button>)}
 
                             </motion.div>
-
-
                         )}
 
                         {analysisDone && (
@@ -249,13 +240,12 @@ const Step1SetUp = ({ onStart }) => {
 
 
                         <motion.button
-                        onClick={handleStart}
+                            onClick={handleStart}
                             disabled={!role || !experience || loading}
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.95 }}
                             className='w-full disabled:bg-gray-600 bg-green-600 hover:bg-green-700 text-white py-3 rounded-full text-lg font-semibold transition duration-300 shadow-md'>
-                            {loading ? "Staring...":"Start Interview"}
-
+                            {loading ? "Staring..." : "Start Interview"}
 
                         </motion.button>
                     </div>

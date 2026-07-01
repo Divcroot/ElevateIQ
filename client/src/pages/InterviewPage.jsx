@@ -27,8 +27,6 @@ const InterviewPage = () => {
           {step===3 && (
             <Step3Report report={interviewData}/>
         )}
-
-      
     </div>
   )
 }
