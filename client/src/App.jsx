@@ -10,7 +10,7 @@ import Pricing from './pages/Pricing'
 import InterviewReport from './pages/InterviewReport'
 import { useUser } from './context/UserContext'
 
-export const ServerUrl  = "http://localhost:8000"
+export const ServerUrl  = import.meta.env.SERVER_URL
 
 const App = () => {
   const {setUserData} = useUser()
