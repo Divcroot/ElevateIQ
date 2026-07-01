@@ -10,11 +10,10 @@ import {
 import { useState } from 'react';
 import axios from "axios"
 import { ServerUrl } from '../App';
-import { useDispatch, useSelector } from 'react-redux';
-import { setUserData } from '../redux/userSlice';
-function Step1SetUp({ onStart }) {
-    const {userData}= useSelector((state)=>state.user)
-    const dispatch = useDispatch()
+import { useUser } from '../context/UserContext';
+
+const Step1SetUp = ({ onStart }) => {
+    const {userData, setUserData} = useUser()
     const [role, setRole] = useState("");
     const [experience, setExperience] = useState("");
     const [mode, setMode] = useState("Technical");
@@ -60,7 +59,7 @@ function Step1SetUp({ onStart }) {
            const result = await axios.post(ServerUrl + "/api/interview/generate-questions" , {role, experience, mode , resumeText, projects, skills } , {withCredentials:true}) 
            console.log(result.data)
            if(userData){
-            dispatch(setUserData({...userData , credits:result.data.creditsLeft}))
+            setUserData({...userData , credits:result.data.creditsLeft})
            }
            setLoading(false)
            onStart(result.data)
@@ -75,7 +74,7 @@ function Step1SetUp({ onStart }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className='min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 px-4'>
+            className='min-h-screen flex items-center justify-center bg-linear-to-br from-gray-100 to-gray-200 px-4'>
 
             <div className='w-full max-w-6xl bg-white rounded-3xl shadow-2xl grid md:grid-cols-2 overflow-hidden'>
 
@@ -83,7 +82,7 @@ function Step1SetUp({ onStart }) {
                     initial={{ x: -80, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.7 }}
-                    className='relative bg-gradient-to-br from-green-50 to-green-100 p-12 flex flex-col justify-center'>
+                    className='relative bg-linear-to-br from-green-50 to-green-100 p-12 flex flex-col justify-center'>
 
                     <h2 className="text-4xl font-bold text-gray-800 mb-6">
                         Start Your AI Interview

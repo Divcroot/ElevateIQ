@@ -8,7 +8,7 @@ import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YA
 import jsPDF from "jspdf"
 import autoTable from "jspdf-autotable"
 
-function Step3Report({ report }) {
+const Step3Report = ({ report }) => {
   if (!report) {
     return (
       <div className="min-h-screen flex items-center justify-center">

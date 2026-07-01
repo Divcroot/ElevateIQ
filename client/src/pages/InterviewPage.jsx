@@ -4,7 +4,7 @@ import Step1SetUp from '../components/Step1SetUp'
 import Step2Interview from '../components/Step2Interview'
 import Step3Report from '../components/Step3Report'
 
-function InterviewPage() {
+const InterviewPage = () => {
     const [step,setStep] = useState(1)
     const [interviewData,setInterviewData] = useState(null)
 
