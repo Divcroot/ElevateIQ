@@ -12,6 +12,7 @@ import { ServerUrl } from '../App'
 import { BsArrowRight } from 'react-icons/bs'
 
 const Step2Interview = ({ interviewData, onFinish }) => {
+  
   const { interviewId, questions, userName } = interviewData;
   const [isIntroPhase, setIsIntroPhase] = useState(true);
 
