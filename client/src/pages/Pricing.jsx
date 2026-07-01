@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from "motion/react";
 import axios from 'axios';
 import { ServerUrl } from '../App';
-import { useDispatch } from 'react-redux';
-import { setUserData } from '../redux/userSlice';
-function Pricing() {
+import { useUser } from '../context/UserContext';
+
+const Pricing = () => {
   const navigate = useNavigate()
   const [selectedPlan, setSelectedPlan] = useState("free");
   const [loadingPlan, setLoadingPlan] = useState(null);
-  const dispatch = useDispatch()
+  const {setUserData} = useUser()
 
   const plans = [
     {
@@ -83,7 +83,7 @@ function Pricing() {
 
       handler:async function (response) {
         const verifypay = await axios.post(ServerUrl + "/api/payment/verify" ,response , {withCredentials:true})
-        dispatch(setUserData(verifypay.data.user))
+        setUserData(verifypay.data.user)
 
           alert("Payment Successful 🎉 Credits Added!");
           navigate("/")
@@ -108,7 +108,7 @@ function Pricing() {
 
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-gray-50 to-emerald-50 py-16 px-6'>
+    <div className='min-h-screen bg-linear-to-br from-gray-50 to-emerald-50 py-16 px-6'>
 
       <div className='max-w-6xl mx-auto mb-14 flex items-start gap-4'>
 
