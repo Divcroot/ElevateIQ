@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { FaTimes } from "react-icons/fa";
-import Auth from '../pages/auth';
+import Auth from '../pages/Auth';
 import { useUser } from '../context/UserContext';
 
 const AuthModel = ({onClose}) => {
