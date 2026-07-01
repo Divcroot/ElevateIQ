@@ -10,7 +10,7 @@ import Pricing from './pages/Pricing'
 import InterviewReport from './pages/InterviewReport'
 import { useUser } from './context/UserContext'
 
-export const ServerUrl  = import.meta.env.SERVER_URL
+export const ServerUrl = import.meta.env.VITE_SERVER_URL || window.location.origin
 
 const App = () => {
   const {setUserData} = useUser()
